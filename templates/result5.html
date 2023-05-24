@@ -12,25 +12,13 @@
 		<h5>{{ dfs_result|join(', ') }}</h5>
 
 		<h2>Prim Algorithm Result:</h2>
-		<ul>
-			{% for edge, weight in prim_result.items() %}
-			<li>{{ edge }} : {{ weight }}</li>
-			{% endfor %}
-		</ul>
-
+		<h5>{{ prim_result }}</h5>
 		<h2>Graph:</h2>
+
 		<div>
 			<img
 				src="{{ url_for('static', filename='img/graph.png') }}"
 				alt="Graph"
-			/>
-		</div>
-
-		<h2>Prim's Graph:</h2>
-		<div>
-			<img
-				src="{{ url_for('static', filename='img/prim_graph.png') }}"
-				alt="Prim's Graph"
 			/>
 		</div>
 	</body>
