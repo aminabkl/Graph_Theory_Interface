@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.min.js"
+			integrity="sha384-3fJQsoYfC9zrLJL3anVVH0M2y0lwj+/lZ+OGkrG/CfRnJ+q5KG8mYZTI5g6YI6z9"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+			crossorigin="anonymous"
+		></script>
+		<title>Graph</title>
+	</head>
+	<body>
+		<nav class="navbar">
+			<ul>
+				<li class="home-btn">
+					<a href="/" class="nav-link">Home</a>
+				</li>
+				<li class="dropdown">
+					<span>Display a graph</span>
+					<div class="dropdown-content">
+						<a href="/display-graph/with-weights">With weights</a>
+						<a href="/display-graph/without-weights">Without weights</a>
+					</div>
+				</li>
+				<li class="dropdown">
+					<span>Graph algorithms</span>
+					<div class="dropdown-content">
+						<a href="/graph-algorithms/dfs">DFS</a>
+						<a href="/graph-algorithms/bfs">BFS</a>
+						<a href="/graph-algorithms/prim">Prim</a>
+					</div>
+				</li>
+				<li class="dropdown">
+					<span>Explanation of the graphs algorithme</span>
+					<div class="dropdown-content">
+						<a href="/graph-algorithms/dfs/explanation">DFS</a>
+						<a href="/graph-algorithms/bfs/explanation">BFS</a>
+						<a href="/graph-algorithms/prim/explanation">Prim</a>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="row">
+			<h1 class="text-center">Display Graph</h1>
+			<hr />
+			<div class="form-div">
+				<form method="POST">
+					<div class="form-group">
+						<label for="num_nodes">Number of Nodes:</label>
+						<input
+							type="number"
+							class="form-control"
+							name="num_nodes"
+							id="num_nodes"
+							required
+						/>
+					</div>
+					<table class="table table-bordered" id="adj_matrix_table">
+						<!-- Dynamically generated table for adjacency matrix -->
+						<script>
+							$("#num_nodes").on("input", function () {
+								const numNodes = $(this).val();
+								const startNodeSelect = $("#start_node");
+								const adjMatrixTable = $("#adj_matrix_table");
+								startNodeSelect.empty();
+								adjMatrixTable.empty();
+
+								const headerRow = $("<tr>");
+								headerRow.append($("<th>"));
+								for (let i = 0; i < numNodes; i++) {
+									const th = $("<th>").text(i);
+									headerRow.append(th);
+									const option = $("<option>").attr("value", i).text(i);
+									startNodeSelect.append(option);
+								}
+								adjMatrixTable.append(headerRow);
+
+								for (let i = 0; i < numNodes; i++) {
+									const row = $("<tr>");
+									const th = $("<th>").text(i);
+									row.append(th);
+									for (let j = 0; j < numNodes; j++) {
+										const td = $("<td>");
+										const input = $("<input>").attr({
+											type: "number",
+											name: `adj_matrix_${i}_${j}`,
+											required: true,
+										});
+										td.append(input);
+										row.append(td);
+									}
+									adjMatrixTable.append(row);
+								}
+							});
+						</script>
+					</table>
+					<button type="submit" class="submit-btn">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div>
+			<h2>Graph:</h2>
+			<img
+				src="{{ url_for('static', filename='img/graph.png') }}"
+				alt="Graph"
+			/>
+		</div>
+	</body>
+</html>
+<style>
+	tr {
+		width: 10px;
+	}
+	input,
+	th {
+		width: 50px;
+	}
+	.submit-btn {
+		background-color: #1dbf73;
+		color: white;
+		margin-top: 16px;
+		width: 110px;
+		display: inline-block;
+		box-sizing: border-box;
+		position: relative;
+		padding: 12px 24px;
+		border: 1px solid transparent;
+		border-radius: 4px;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 100%;
+		text-decoration: none;
+		text-align: center;
+	}
+	.submit-btn:hover {
+		cursor: pointer;
+		background-color: #1b915a;
+	}
+	.form-div {
+		margin: 0 auto;
+		/* width: 50%; */
+		padding: 1rem;
+	}
+	#graph-container {
+		display: none;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		background-color: #f2f2f2;
+		height: 70px;
+		display: flex;
+		gap: 5rem;
+		justify-content: center;
+		text-align: center;
+		align-items: center;
+		font-size: 21px;
+	}
+	.home-btn {
+		margin-right: 15rem;
+	}
+	a {
+		text-decoration: none;
+		color: #292929;
+	}
+	li,
+	span {
+		color: #292929;
+	}
+	li:hover span {
+		cursor: pointer;
+		padding-bottom: 20px;
+		border-bottom: 3px solid #1dbf73b5;
+		z-index: 2;
+		position: relative;
+	}
+	.dropdown-content:hover {
+		cursor: pointer;
+		display: inline;
+	}
+	.dropdown-content {
+		background-color: #f2f2f2;
+		display: none;
+		position: absolute;
+		margin-top: 13px;
+		/* z-index: -1; */
+		height: 17%;
+		width: 11%;
+		align-items: center;
+		text-align: start;
+		justify-content: flex-start;
+		padding: 15px 0 10px 10px;
+	}
+	li:hover .dropdown-content {
+		display: grid;
+	}
+	.dropdown-content a:hover {
+		text-decoration: underline;
+		color: #414141;
+	}
+</style>
