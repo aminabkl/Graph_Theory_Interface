@@ -5,13 +5,14 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 		<script
 			src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha384-3fJQsoYfC9zrLJL3anVVH0M2y0lwj+/lZ+OGkrG/CfRnJ+q5KG8mYZTI5g6YI6z9"
 			crossorigin="anonymous"
 		></script>
 
-		<title>Graph</title>
+		<title>Dfs</title>
 	</head>
 	<body>
 		<nav class="navbar">
@@ -40,71 +41,86 @@
 				</li>
 			</ul>
 		</nav>
+		<h1>Dfs</h1>
+		<div class="container">
+			<div class="row">
+				<h1 class="text-center">Graph Algorithms</h1>
+				<hr />
+				<div class="form-div">
+					<form method="POST">
+						<div class="form-group">
+							<label for="num_nodes">Number of Nodes:</label>
+							<input
+								type="number"
+								class="form-control"
+								name="num_nodes"
+								id="num_nodes"
+								required
+							/>
+						</div>
+						<div class="form-group">
+							<label for="start_node">Start Node:</label>
+							<select
+								class="form-control"
+								name="start_node"
+								id="start_node"
+								required
+							>
+								<!-- Options dynamically generated based on the number of nodes -->
+							</select>
+						</div>
+						<table class="table table-bordered" id="adj_matrix_table">
+							<!-- Dynamically generated table for adjacency matrix -->
+							<script>
+								$("#num_nodes").on("input", function () {
+									const numNodes = $(this).val();
+									const startNodeSelect = $("#start_node");
+									const adjMatrixTable = $("#adj_matrix_table");
+									startNodeSelect.empty();
+									adjMatrixTable.empty();
 
-		<div class="row">
-			<h1 class="text-center">Display Graph</h1>
-			<hr />
-			<div class="form-div">
-				<form method="POST">
-					<div class="form-group">
-						<label for="num_nodes">Number of Nodes:</label>
-						<input
-							type="number"
-							class="form-control"
-							name="num_nodes"
-							id="num_nodes"
-							required
-						/>
-					</div>
-					<table class="table table-bordered" id="adj_matrix_table">
-						<!-- Dynamically generated table for adjacency matrix -->
-						<script>
-							$("#num_nodes").on("input", function () {
-								const numNodes = $(this).val();
-								const startNodeSelect = $("#start_node");
-								const adjMatrixTable = $("#adj_matrix_table");
-								startNodeSelect.empty();
-								adjMatrixTable.empty();
-
-								const headerRow = $("<tr>");
-								headerRow.append($("<th>"));
-								for (let i = 0; i < numNodes; i++) {
-									const th = $("<th>").text(i);
-									headerRow.append(th);
-									const option = $("<option>").attr("value", i).text(i);
-									startNodeSelect.append(option);
-								}
-								adjMatrixTable.append(headerRow);
-
-								for (let i = 0; i < numNodes; i++) {
-									const row = $("<tr>");
-									const th = $("<th>").text(i);
-									row.append(th);
-									for (let j = 0; j < numNodes; j++) {
-										const td = $("<td>");
-										const input = $("<input>").attr({
-											type: "number",
-											name: `adj_matrix_${i}_${j}`,
-											required: true,
-										});
-										td.append(input);
-										row.append(td);
+									const headerRow = $("<tr>");
+									headerRow.append($("<th>"));
+									for (let i = 0; i < numNodes; i++) {
+										const th = $("<th>").text(i);
+										headerRow.append(th);
+										const option = $("<option>").attr("value", i).text(i);
+										startNodeSelect.append(option);
 									}
-									adjMatrixTable.append(row);
-								}
-							});
-						</script>
-					</table>
-					<button type="submit" class="submit-btn">Submit</button>
-				</form>
+									adjMatrixTable.append(headerRow);
+
+									for (let i = 0; i < numNodes; i++) {
+										const row = $("<tr>");
+										const th = $("<th>").text(i);
+										row.append(th);
+										for (let j = 0; j < numNodes; j++) {
+											const td = $("<td>");
+											const input = $("<input>").attr({
+												type: "number",
+												name: `adj_matrix_${i}_${j}`,
+												required: true,
+											});
+											td.append(input);
+											row.append(td);
+										}
+										adjMatrixTable.append(row);
+									}
+								});
+							</script>
+						</table>
+						<button type="submit" class="submit-btn">Submit</button>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div>
-			<h2>Graph:</h2>
-			<img
-				src="{{ url_for('static', filename='img/graph.png') }}"
-				alt="Graph"
-			/>
+		<div class="result">
+			<h5>{{ dfs_result|join(', ') }}</h5>
+			<div>
+				<img
+					src="{{ url_for('static', filename='img/dfs_graph.png') }}"
+					alt="Graph"
+				/>
+			</div>
 		</div>
 	</body>
 </html>
@@ -136,11 +152,6 @@
 	.submit-btn:hover {
 		cursor: pointer;
 		background-color: #1b915a;
-	}
-	.form-div {
-		margin: 0 auto;
-		/* width: 50%; */
-		padding: 1rem;
 	}
 	* {
 		margin: 0;

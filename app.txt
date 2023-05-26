@@ -1,38 +1,37 @@
-from flask import Flask, render_template, request
-import numpy as np
-import networkx as nx
-from bfs import bfs
-from dfs import dfs
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graph Theory Algorithms</title>
+	</head>
+	<body>
+		<h1>Graph Theory Algorithms</h1>
+		<h2>BFS Result:</h2>
+		<h5>{{ bfs_result|join(', ') }}</h5>
 
+		<!-- <h2>DFS Result:</h2>
+		<h5>{{ dfs_result|join(', ') }}</h5>
 
-app = Flask(__name__)
+		<h2>Prim Algorithm Result:</h2>
+		<ul>
+			{% for edge, weight in prim_result.items() %}
+			<li>{{ edge }} : {{ weight }}</li>
+			{% endfor %}
+		</ul> -->
 
+		<h2>Graph:</h2>
+		<div>
+			<img
+				src="{{ url_for('static', filename='img/graph.png') }}"
+				alt="Graph"
+			/>
+		</div>
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        num_nodes = int(request.form['num_nodes'])
-        adj_matrix_str = request.form['adj_matrix']
-        # adj_matrix = np.fromstring(
-        #     adj_matrix_str, sep=',').reshape((num_nodes, num_nodes))
-        # adj_matrix = np.array(adj_matrix_str.split(
-        #     ','), dtype=int).reshape((num_nodes, num_nodes))
-        # adj_matrix = np.array(
-        #     [int(x) for x in adj_matrix_str.replace('\r\n', ' ').split()])
-        # print(adj_matrix)
-        adj_matrix = np.array([list(map(int, line.split()))
-                              for line in adj_matrix_str.strip().split('\n')])
-        # graph = nx.from_numpy_matrix(adj_matrix)
-
-        graph = nx.DiGraph(adj_matrix)
-        adj_matrix = nx.to_numpy_matrix(graph)
-
-        dfs_result = dfs(adj_matrix, 0)
-        bfs_result = bfs(adj_matrix, 0)
-        return render_template('results.html', bfs_result=bfs_result, dfs_result=dfs_result)
-    else:
-        return render_template('index.html')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+		<!-- <h2>Prim's Graph:</h2>
+		<div>
+			<img
+				src="{{ url_for('static', filename='img/prim_graph.png') }}"
+				alt="Prim's Graph"
+			/>
+		</div> -->
+	</body>
+</html>
