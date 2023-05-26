@@ -16,9 +16,9 @@
 	<body>
 		<nav class="navbar">
 			<ul>
-				<li class="home-btn">
+				<h2 class="home-btn">
 					<a href="/" class="nav-link">Home</a>
-				</li>
+				</h2>
 				<li class="dropdown">
 					<a href="/display-graph"><span>Display a graph</span></a>
 				</li>
@@ -30,17 +30,8 @@
 						<a href="/graph-algorithms/prim">Prim</a>
 					</div>
 				</li>
-				<li class="dropdown">
-					<span>Explanation of the graphs algorithme</span>
-					<div class="dropdown-content">
-						<a href="/graph-algorithms/dfs/explanation">DFS</a>
-						<a href="/graph-algorithms/bfs/explanation">BFS</a>
-						<a href="/graph-algorithms/prim/explanation">Prim</a>
-					</div>
-				</li>
 			</ul>
 		</nav>
-
 		<div class="row">
 			<h1 class="text-center">Display Graph</h1>
 			<hr />
@@ -57,7 +48,6 @@
 						/>
 					</div>
 					<table class="table table-bordered" id="adj_matrix_table">
-						<!-- Dynamically generated table for adjacency matrix -->
 						<script>
 							$("#num_nodes").on("input", function () {
 								const numNodes = $(this).val();
@@ -99,7 +89,21 @@
 				</form>
 			</div>
 		</div>
-		<div>
+		<div
+			id="graph-result"
+			{%
+			if
+			display_result
+			%}
+			style="display: block"
+			{%
+			else
+			%}
+			style="display: none"
+			{%
+			endif
+			%}
+		>
 			<h2>Graph:</h2>
 			<img
 				src="{{ url_for('static', filename='img/graph.png') }}"
@@ -139,7 +143,6 @@
 	}
 	.form-div {
 		margin: 0 auto;
-		/* width: 50%; */
 		padding: 1rem;
 	}
 	* {
@@ -161,7 +164,7 @@
 		font-size: 21px;
 	}
 	.home-btn {
-		margin-right: 15rem;
+		margin-right: 25rem;
 	}
 	a {
 		text-decoration: none;
