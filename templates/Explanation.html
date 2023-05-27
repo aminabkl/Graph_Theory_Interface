@@ -10,6 +10,7 @@
 		{% include 'navbar.html' %}
 		<main>
 			<div class="explanation dfs-expl">
+				<span class="algo-name">DFS</span>
 				<p>
 					Depth-first search (DFS) is an algorithm for searching a graph or tree
 					data structure. The algorithm starts at the root (top) node of a tree
@@ -19,6 +20,7 @@
 				</p>
 			</div>
 			<div class="explanation bfs-expl">
+				<span class="algo-name">BFS</span>
 				<p>
 					Breadth-first search (BFS) is an algorithm for traversing or searching
 					tree or graph data structures. It starts at the tree root (or some
@@ -28,6 +30,7 @@
 				</p>
 			</div>
 			<div class="explanation prim-expl">
+				<span class="algo-name">Prim</span>
 				<p>
 					In computer science, Prim's (also known as Jarník's) algorithm is a
 					greedy algorithm that finds a minimum spanning tree for a weighted
@@ -44,6 +47,19 @@
 	</body>
 </html>
 <style>
+	.algo-name {
+		margin-top: -55px;
+		font-size: 35px;
+		font-weight: 600;
+		/* margin-bottom: 1rem; */
+		position: absolute;
+		background: white;
+		color: #4e397a;
+		padding: 0px;
+	}
+	main {
+		margin: 30px;
+	}
 	.explanation {
 		margin-top: 2rem;
 		margin-left: 2rem;

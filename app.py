@@ -1,6 +1,6 @@
-from prim import Prim
-from dfs import dfs
-from bfs import bfs
+from algorithm.prim import Prim
+from algorithm.dfs import dfs
+from algorithm.bfs import bfs
 import os
 
 from flask import Flask, render_template, request
