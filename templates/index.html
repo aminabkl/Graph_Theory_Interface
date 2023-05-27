@@ -6,130 +6,74 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Index</title>
 	</head>
-	<body>
-		<nav class="navbar">
-			<ul>
-				<h2 class="home-btn">
-					<a href="/" class="nav-link">Home</a>
-				</h2>
-				<li class="dropdown">
-					<a href="/display-graph"><span>Display a graph</span></a>
-				</li>
-				<li class="dropdown">
-					<span>Graph algorithms</span>
-					<div class="dropdown-content">
-						<a href="/graph-algorithms/dfs">DFS</a>
-						<a href="/graph-algorithms/bfs">BFS</a>
-						<a href="/graph-algorithms/prim">Prim</a>
-					</div>
-				</li>
-			</ul>
-		</nav>
-		<main>
-			<div class="explanation dfs-expl">
-				<p>
-					Depth-first search (DFS) is an algorithm for searching a graph or tree
-					data structure. The algorithm starts at the root (top) node of a tree
-					and goes as far as it can down a given branch (path), then backtracks
-					until it finds an unexplored path, and then explores it. The algorithm
-					does this until the entire graph has been explored.
-				</p>
-			</div>
-			<div class="explanation bfs-expl">
-				<p>
-					Breadth-first search (BFS) is an algorithm for traversing or searching
-					tree or graph data structures. It starts at the tree root (or some
-					arbitrary node of a graph, sometimes referred to as a 'search
-					key'[1]), and explores all of the neighbor nodes at the present depth
-					prior to moving on to the nodes at the next depth level.
-				</p>
-			</div>
-			<div class="explanation prim-expl">
-				<p>
-					In computer science, Prim's (also known as Jarník's) algorithm is a
-					greedy algorithm that finds a minimum spanning tree for a weighted
-					undirected graph. This means it finds a subset of the edges that forms
-					a tree that includes every vertex, where the total weight of all the
-					edges in the tree is minimized. The algorithm operates by building
-					this tree one vertex at a time, from an arbitrary starting vertex, at
-					each step adding the cheapest possible connection from the tree to
-					another vertex.
-				</p>
-			</div>
-		</main>
+	<body class="bg">
+		<div class="title"><h1>Graph Theory Interface</h1></div>
+		<div class="btn-container">
+			<a href="/explanation"><button class="btn">Explanation</button></a>
+			<a href="/display-graph"><button class="btn">Display Graph</button></a>
+			<a href="/graph-algorithms/bfs"><button class="btn"></a>
+				Algorithms
+			</button>
+		</div>
 	</body>
 </html>
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		background-color: #f2f2f2;
-		height: 70px;
-		display: flex;
-		gap: 5rem;
-		justify-content: center;
-		text-align: center;
-		align-items: center;
-		font-size: 21px;
-	}
-	.home-btn {
-		margin-right: 25rem;
-	}
 	a {
 		text-decoration: none;
-		color: #292929;
+		color: white;
 	}
-	li,
-	span {
-		color: #292929;
-	}
-	li:hover span {
-		cursor: pointer;
-		padding-bottom: 20px;
-		border-bottom: 3px solid #1dbf73b5;
-		z-index: 2;
-		position: relative;
-	}
-	.dropdown-content:hover {
-		cursor: pointer;
-		display: inline;
-	}
-	.dropdown-content {
-		background-color: #f2f2f2;
-		display: none;
+	.bg {
+		background-image: url("../static/assets/background2.jpg");
+		/* height: 100%; */
 		position: absolute;
-		margin-top: 13px;
-		/* z-index: -1; */
-		height: 17%;
-		width: 11%;
-		align-items: center;
-		text-align: start;
-		justify-content: flex-start;
-		padding: 15px 0 10px 10px;
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
-	li:hover .dropdown-content {
+	.title {
+		display: flex;
+		width: 60%;
+		margin-left: 10px;
+	}
+	h1 {
+		text-align: center;
+		font-size: 100px;
+		color: white;
+		font-weight: bold;
+		letter-spacing: 1px;
+	}
+	.btn-container {
 		display: grid;
+		width: 22%;
+		float: right;
+		margin-right: -22%;
+		margin-top: -7%;
 	}
-	.dropdown-content a:hover {
-		text-decoration: underline;
-		color: #414141;
+	.btn {
+		font-family: georgia;
+		color: #ffffff !important;
+		font-size: 20px;
+		text-shadow: 0px 0px 0px #ffffff;
+		box-shadow: 0px 0px 3px #564da5;
+		padding: 12px 22px;
+		border-radius: 5px;
+		border: 2px solid #ffffff;
+		background: none;
+		cursor: pointer;
+		margin-bottom: 20px;
+		letter-spacing: 2px;
+		width: 100%;
 	}
-
-	.explanation {
-		margin-top: 2rem;
-		margin-left: 2rem;
-		margin-right: 2rem;
-		padding: 30px;
-		font-size: 21px;
-		text-align: justify;
-		line-height: 1.6;
-		color: #292929;
-		box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	.btn:hover {
+		color: #ffffff !important;
+		background: #564da581;
+		box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+		background: linear-gradient(
+			to right,
+			#6f64d67e,
+			#6a61b681,
+			#564da581,
+			#4e4376
+		);
+		transition: 0.5s;
 	}
 </style>

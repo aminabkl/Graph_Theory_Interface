@@ -1,13 +1,15 @@
+from prim import Prim
+from dfs import dfs
+from bfs import bfs
 import os
 
 from flask import Flask, render_template, request
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 
-from bfs import bfs
-from dfs import dfs
-from prim import Prim
 
 
 app = Flask(__name__)
@@ -16,6 +18,11 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
+
+
+@app.route('/explanation', methods=['GET', 'POST'])
+def explanation():
+    return render_template('Explanation.html')
 
 
 @app.route('/display-graph', methods=['GET', 'POST'])
@@ -43,8 +50,8 @@ def displayGraph():
         nx.draw(graph, pos, with_labels=True, node_color='lightblue',
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
-        plt.ion()
-        plt.show()
+        # plt.ion()
+        # plt.show()
         plt.savefig(os.path.join(img_folder, 'graph.png'), format='png')
         return render_template('DisplayGraph.html', display_result=True)
     else:
@@ -84,8 +91,8 @@ def dfsAlgo():
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
 
-        plt.ion()
-        plt.show()
+        # plt.ion()
+        # plt.show()
 
         plt.savefig(os.path.join(img_folder, 'dfs_graph.png'), format='png')
 
@@ -127,8 +134,8 @@ def bfsAlgo():
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
 
-        plt.ion()
-        plt.show()
+        # plt.ion()
+        # plt.show()
 
         plt.savefig(os.path.join(img_folder, 'bfs_graph.png'), format='png')
 
@@ -172,8 +179,8 @@ def primAlgo():
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
 
-        plt.ion()
-        plt.show()
+        # plt.ion()
+        # plt.show()
 
         plt.savefig(os.path.join(
             img_folder, 'prim_graph_before.png'), format='png')

@@ -15,29 +15,10 @@
 		<title>Dfs</title>
 	</head>
 	<body>
-		<nav class="navbar">
-			<ul>
-				<h2 class="home-btn">
-					<a href="/" class="nav-link">Home</a>
-				</h2>
-				<li class="dropdown">
-					<a href="/display-graph"><span>Display a graph</span></a>
-				</li>
-				<li class="dropdown">
-					<span>Graph algorithms</span>
-					<div class="dropdown-content">
-						<a href="/graph-algorithms/dfs">DFS</a>
-						<a href="/graph-algorithms/bfs">BFS</a>
-						<a href="/graph-algorithms/prim">Prim</a>
-					</div>
-				</li>
-			</ul>
-		</nav>
-		<h1>Dfs</h1>
+		{% include 'navbar.html' %}
+		<h1 class="text-center">DFS</h1>
 		<div class="container">
 			<div class="row">
-				<h1 class="text-center">Graph Algorithms</h1>
-				<hr />
 				<div class="form-div">
 					<form method="POST">
 						<div class="form-group">
@@ -49,6 +30,7 @@
 								id="num_nodes"
 								required
 							/>
+							<button type="submit" class="submit-btn">Submit</button>
 						</div>
 						<div class="form-group">
 							<label for="start_node">Start Node:</label>
@@ -97,7 +79,6 @@
 								});
 							</script>
 						</table>
-						<button type="submit" class="submit-btn">Submit</button>
 					</form>
 				</div>
 			</div>
@@ -117,17 +98,60 @@
 			endif
 			%}
 		>
-			<h5>{{ dfs_result|join(', ') }}</h5>
+			<h2 class="text-center">Result :</h2>
+			<h3>
+				<span class="result-span"> {{ dfs_result|join(' - ') }}</span>
+			</h3>
 			<div>
 				<img
 					src="{{ url_for('static', filename='img/dfs_graph.png') }}"
 					alt="Graph"
+					class="result-img"
 				/>
 			</div>
 		</div>
+		{% block content %}{% endblock %}
 	</body>
 </html>
 <style>
+	h3 {
+		text-align: center;
+		padding: 20px;
+	}
+	.result-span {
+		font-size: 25px;
+		background-color: #2a1d4662;
+		padding: 1%;
+	}
+	.table {
+		margin-top: 50px;
+	}
+	.form-group {
+		margin-bottom: 10px;
+	}
+	.result-img {
+		width: 50%;
+		height: auto;
+		display: flex;
+		margin-left: 15rem;
+	}
+	#num_nodes {
+		width: 15%;
+		height: 10px;
+		padding: 10px;
+		margin: 0 10px;
+	}
+
+	#start_node {
+		width: 10%;
+		padding: 2px;
+		margin: 0 10px;
+	}
+	.text-center {
+		text-align: center;
+		color: #2a1d46;
+		margin: 30px 0;
+	}
 	tr {
 		width: 10px;
 	}
@@ -136,7 +160,8 @@
 		width: 50px;
 	}
 	.submit-btn {
-		background-color: #1dbf73;
+		margin: 30px 0;
+		background-color: #635289;
 		color: white;
 		margin-top: 16px;
 		width: 110px;
@@ -154,66 +179,12 @@
 	}
 	.submit-btn:hover {
 		cursor: pointer;
-		background-color: #1b915a;
+		background-color: #574088;
 	}
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		background-color: #f2f2f2;
-		height: 70px;
-		display: flex;
-		gap: 5rem;
-		justify-content: center;
+	.form-div {
+		margin: 0 auto;
+		padding: 1rem;
+		width: 50%;
 		text-align: center;
-		align-items: center;
-		font-size: 21px;
-	}
-	.home-btn {
-		margin-right: 25rem;
-	}
-	a {
-		text-decoration: none;
-		color: #292929;
-	}
-	li,
-	span {
-		color: #292929;
-	}
-	li:hover span {
-		cursor: pointer;
-		padding-bottom: 20px;
-		border-bottom: 3px solid #1dbf73b5;
-		z-index: 2;
-		position: relative;
-	}
-	.dropdown-content:hover {
-		cursor: pointer;
-		display: inline;
-	}
-	.dropdown-content {
-		background-color: #f2f2f2;
-		display: none;
-		position: absolute;
-		margin-top: 13px;
-		/* z-index: -1; */
-		height: 17%;
-		width: 11%;
-		align-items: center;
-		text-align: start;
-		justify-content: flex-start;
-		padding: 15px 0 10px 10px;
-	}
-	li:hover .dropdown-content {
-		display: grid;
-	}
-	.dropdown-content a:hover {
-		text-decoration: underline;
-		color: #414141;
 	}
 </style>

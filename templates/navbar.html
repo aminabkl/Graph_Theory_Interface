@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>navbar</title>
+	</head>
+	<body>
+		<nav class="navbar">
+			<ul>
+				<h2 class="home-btn">
+					<a href="/" class="nav-link">Home</a>
+				</h2>
+				<li class="dropdown">
+					<span class="nav-span">Graph algorithms</span>
+					<div class="dropdown-content">
+						<a href="/graph-algorithms/bfs">
+							<span class="span-dropdown"> BFS</span>
+						</a>
+						<a href="/graph-algorithms/dfs">
+							<span class="span-dropdown"> DFS</span></a
+						>
+						<a href="/graph-algorithms/prim">
+							<span class="span-dropdown"> Prim</span></a
+						>
+					</div>
+				</li>
+				<li class="dropdown">
+					<a href="/explanation"
+						><span class="nav-span">Algorithms explanation</span></a
+					>
+				</li>
+				<li class="dropdown">
+					<a href="/display-graph"
+						><span class="nav-span">Display a graph</span></a
+					>
+				</li>
+			</ul>
+		</nav>
+	</body>
+</html>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	.navbar {
+		background-color: #635289;
+		/* background-color: #2a1d46; */
+		height: 70px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	}
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		height: 70px;
+		display: flex;
+		gap: 5rem;
+		justify-content: center;
+		text-align: center;
+		align-items: center;
+		font-size: 21px;
+	}
+	.home-btn {
+		margin-right: 20rem;
+	}
+	a {
+		text-decoration: none;
+		color: white;
+	}
+	li,
+	.nav-span {
+		color: white;
+	}
+	li:hover .nav-span {
+		cursor: pointer;
+		padding-bottom: 20px;
+		border-bottom: 3px solid white;
+		z-index: 2;
+		position: relative;
+	}
+	.dropdown-content:hover {
+		cursor: pointer;
+		display: inline;
+	}
+	.dropdown-content {
+		background-color: #635289;
+		/* background-color: #2a1d46; */
+		display: none;
+		position: absolute;
+		margin-top: 13px;
+		height: 17%;
+		width: 11%;
+		align-items: center;
+		text-align: start;
+		justify-content: flex-start;
+		padding: 15px 0 10px 10px;
+	}
+	li:hover .dropdown-content {
+		display: grid;
+	}
+	.dropdown-content .span-dropdown:hover {
+		text-decoration: underline;
+		color: white;
+	}
+</style>

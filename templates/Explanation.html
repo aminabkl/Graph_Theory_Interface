@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Explanation</title>
+	</head>
+	<body>
+		{% include 'navbar.html' %}
+		<main>
+			<div class="explanation dfs-expl">
+				<p>
+					Depth-first search (DFS) is an algorithm for searching a graph or tree
+					data structure. The algorithm starts at the root (top) node of a tree
+					and goes as far as it can down a given branch (path), then backtracks
+					until it finds an unexplored path, and then explores it. The algorithm
+					does this until the entire graph has been explored.
+				</p>
+			</div>
+			<div class="explanation bfs-expl">
+				<p>
+					Breadth-first search (BFS) is an algorithm for traversing or searching
+					tree or graph data structures. It starts at the tree root (or some
+					arbitrary node of a graph, sometimes referred to as a 'search
+					key'[1]), and explores all of the neighbor nodes at the present depth
+					prior to moving on to the nodes at the next depth level.
+				</p>
+			</div>
+			<div class="explanation prim-expl">
+				<p>
+					In computer science, Prim's (also known as Jarník's) algorithm is a
+					greedy algorithm that finds a minimum spanning tree for a weighted
+					undirected graph. This means it finds a subset of the edges that forms
+					a tree that includes every vertex, where the total weight of all the
+					edges in the tree is minimized. The algorithm operates by building
+					this tree one vertex at a time, from an arbitrary starting vertex, at
+					each step adding the cheapest possible connection from the tree to
+					another vertex.
+				</p>
+			</div>
+		</main>
+		{% block content %}{% endblock %}
+	</body>
+</html>
+<style>
+	.explanation {
+		margin-top: 2rem;
+		margin-left: 2rem;
+		margin-right: 2rem;
+		padding: 30px;
+		font-size: 21px;
+		text-align: justify;
+		line-height: 1.6;
+		color: #292929;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	}
+</style>
