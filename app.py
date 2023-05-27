@@ -1,6 +1,7 @@
-from algorithm.prim import Prim
-from algorithm.dfs import dfs
-from algorithm.bfs import bfs
+from algorithms.prim import Prim
+from algorithms.dfs import dfs
+from algorithms.bfs import bfs
+from algorithms.kosaraju import kosaraju
 import os
 
 from flask import Flask, render_template, request
@@ -184,6 +185,56 @@ def primAlgo():
         return render_template('Prim.html', prim_result=prim_result, display_result=True)
     else:
         return render_template('Prim.html', display_result=False, prim_result={})
+
+
+@app.route('/graph-algorithms/kosaraju', methods=['GET', 'POST'])
+def kosarajuAlgo():
+    if request.method == 'POST':
+        num_nodes = int(request.form['num_nodes'])
+        adj_matrix = np.zeros((num_nodes, num_nodes), dtype=int)
+
+        for i in range(num_nodes):
+            for j in range(num_nodes):
+                adj_matrix[i][j] = int(request.form[f'adj_matrix_{i}_{j}'])
+
+        graph = nx.DiGraph(adj_matrix)
+
+        # Step 1: Convert adjacency matrix to adjacency list
+        graph_dict = {node: [] for node in range(num_nodes)}
+        for i in range(num_nodes):
+            for j in range(num_nodes):
+                if adj_matrix[i][j] != 0:
+                    graph_dict[i].append(j)
+
+        # Step 2: Apply Kosaraju's algorithm
+        kosaraju_result = kosaraju(graph_dict)
+
+        # Step 3: Convert the kosaraju_result to a format suitable for visualization
+        component_labels = {}
+        for i, component in enumerate(kosaraju_result):
+            for node in component:
+                component_labels[node] = i
+
+        # Step 4: Visualize the graph with component labels
+        for filename in os.listdir(img_folder):
+            file_path = os.path.join(img_folder, filename)
+            os.unlink(file_path)
+
+        fig = plt.figure(1)
+        fig.clf()
+        plt.title('Graph')
+
+        pos = nx.spring_layout(graph)
+        node_colors = [component_labels[node] for node in graph.nodes()]
+        nx.draw(graph, pos, with_labels=True, node_color=node_colors,
+                cmap='viridis', node_size=500, font_size=10, font_weight='bold')
+
+        plt.savefig(os.path.join(
+            img_folder, 'kosaraju_graph.png'), format='png')
+
+        return render_template('Kosaraju.html', kosaraju_result=kosaraju_result, display_result=True)
+    else:
+        return render_template('Kosaraju.html', display_result=False)
 
 
 if __name__ == '__main__':

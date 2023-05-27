@@ -42,13 +42,23 @@
 					another vertex.
 				</p>
 			</div>
+			<div class="explanation kosaraju-expl">
+				<span class="algo-name">Kosaraju</span>
+				<p>
+					In computer science, the Kosaraju-Sharir algorithm is a linear time
+					algorithm to find the strongly connected components of a directed
+					graph. It makes use of the fact that the transpose graph (the same
+					graph with the direction of every edge reversed) has exactly the same
+					strongly connected components as the original graph.
+				</p>
+			</div>
 		</main>
 		{% block content %}{% endblock %}
 	</body>
 </html>
 <style>
 	.algo-name {
-		margin-top: -55px;
+		margin-top: -60px;
 		font-size: 35px;
 		font-weight: 600;
 		/* margin-bottom: 1rem; */

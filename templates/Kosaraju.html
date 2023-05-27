@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.min.js"
+			integrity="sha384-3fJQsoYfC9zrLJL3anVVH0M2y0lwj+/lZ+OGkrG/CfRnJ+q5KG8mYZTI5g6YI6z9"
+			crossorigin="anonymous"
+		></script>
+		<title>Kosaraju</title>
+	</head>
+	<body>
+		{% include 'navbar.html' %}
+		<h1 class="text-center">KOSARAJU</h1>
+		<div class="container">
+			<div class="row">
+				<div class="form-div">
+					<form method="POST">
+						<div class="form-group">
+							<label for="num_nodes">Number of Nodes:</label>
+							<input
+								type="number"
+								class="form-control"
+								name="num_nodes"
+								id="num_nodes"
+								required
+							/>
+							<button type="submit" class="submit-btn">Submit</button>
+						</div>
+						<table class="table table-bordered" id="adj_matrix_table">
+							<script>
+								$("#num_nodes").on("input", function () {
+									const numNodes = $(this).val();
+									const adjMatrixTable = $("#adj_matrix_table");
+									adjMatrixTable.empty();
+
+									const headerRow = $("<tr>");
+									headerRow.append($("<th>"));
+									for (let i = 0; i < numNodes; i++) {
+										const th = $("<th>").text(i);
+										headerRow.append(th);
+									}
+									adjMatrixTable.append(headerRow);
+
+									for (let i = 0; i < numNodes; i++) {
+										const row = $("<tr>");
+										const th = $("<th>").text(i);
+										row.append(th);
+										for (let j = 0; j < numNodes; j++) {
+											const td = $("<td>");
+											const input = $("<input>").attr({
+												type: "number",
+												name: `adj_matrix_${i}_${j}`,
+												required: true,
+											});
+											td.append(input);
+											row.append(td);
+										}
+										adjMatrixTable.append(row);
+									}
+								});
+							</script>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div
+			id="kosaraju-result"
+			{%
+			if
+			display_result
+			%}
+			style="display: block"
+			{%
+			else
+			%}
+			style="display: none"
+			{%
+			endif
+			%}
+		>
+			<h2 class="text-center">The strongly connected components :</h2>
+			<ul>
+				{% for res in kosaraju_result %}
+				<li class="result-span">{{ res }}</li>
+				{% endfor %}
+			</ul>
+			<div class="graph-res">
+				<div class="aft">
+					<h2 class="text-result-aft">Graph:</h2>
+					<img
+						src="{{ url_for('static', filename='img/kosaraju_graph.png') }}"
+						alt="Kosaraju's Graph"
+						class="result-img-aft"
+					/>
+				</div>
+			</div>
+		</div>
+		{% block content %}{% endblock %}
+	</body>
+</html>
+<style>
+	.graph-res {
+		display: flex;
+		justify-content: center;
+	}
+
+	h3 {
+		text-align: center;
+		padding: 20px;
+	}
+	.result-span {
+		font-size: 25px;
+		background-color: #2a1d4662;
+		padding: 1%;
+	}
+	.table {
+		margin-top: 50px;
+	}
+	.form-group {
+		margin-bottom: 10px;
+	}
+
+	.result-img-aft {
+		height: auto;
+		display: flex;
+	}
+	#num_nodes {
+		width: 15%;
+		height: 10px;
+		padding: 10px;
+		margin: 0 10px;
+	}
+	.text-center {
+		text-align: center;
+		color: #2a1d46;
+		margin: 30px 0;
+	}
+	.text-result-aft {
+		text-align: center;
+		color: #2a1d46;
+		margin: 30px 0;
+	}
+	tr {
+		width: 10px;
+	}
+	input,
+	th {
+		width: 50px;
+	}
+	.submit-btn {
+		margin: 30px 0;
+		background-color: #635289;
+		color: white;
+		margin-top: 16px;
+		width: 110px;
+		display: inline-block;
+		box-sizing: border-box;
+		position: relative;
+		padding: 12px 24px;
+		border: 1px solid transparent;
+		border-radius: 4px;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 100%;
+		text-decoration: none;
+		text-align: center;
+	}
+	.submit-btn:hover {
+		cursor: pointer;
+		background-color: #574088;
+	}
+	.form-div {
+		margin: 0 auto;
+		padding: 1rem;
+		width: 50%;
+		text-align: center;
+	}
+</style>
