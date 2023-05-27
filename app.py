@@ -11,8 +11,10 @@ import matplotlib
 matplotlib.use('Agg')
 
 
-
 app = Flask(__name__)
+
+#  PLEASE CHANGE THE PATH SO IT SUITS YOUR LOCAL ENV
+img_folder = "C:\\Users\\lenovo\\Desktop\\TG GUI Flask\\static\\img"
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -35,8 +37,7 @@ def displayGraph():
                 adj_matrix[i][j] = int(request.form[f'adj_matrix_{i}_{j}'])
 
         graph = nx.DiGraph(adj_matrix)
-        img_folder = "C:\\Users\\lenovo\\Desktop\\TG GUI Flask\\static\\img"
-        # delete existing images in folder
+
         for filename in os.listdir(img_folder):
             file_path = os.path.join(img_folder, filename)
             os.unlink(file_path)
@@ -50,8 +51,7 @@ def displayGraph():
         nx.draw(graph, pos, with_labels=True, node_color='lightblue',
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
-        # plt.ion()
-        # plt.show()
+
         plt.savefig(os.path.join(img_folder, 'graph.png'), format='png')
         return render_template('DisplayGraph.html', display_result=True)
     else:
@@ -74,8 +74,7 @@ def dfsAlgo():
 
         dfs_result = list(map(str, dfs(graph, start_node))
                           ) if dfs(graph, start_node) else None
-        img_folder = "C:\\Users\\lenovo\\Desktop\\TG GUI Flask\\static\\img"
-        # delete existing images in folder
+
         for filename in os.listdir(img_folder):
             file_path = os.path.join(img_folder, filename)
             os.unlink(file_path)
@@ -84,15 +83,11 @@ def dfsAlgo():
         fig.clf()
         plt.title('Graph')
 
-        # Draw the graph with edge labels
         pos = nx.spring_layout(graph)
         edge_labels = nx.get_edge_attributes(graph, 'weight')
         nx.draw(graph, pos, with_labels=True, node_color='lightblue',
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
-
-        # plt.ion()
-        # plt.show()
 
         plt.savefig(os.path.join(img_folder, 'dfs_graph.png'), format='png')
 
@@ -117,8 +112,7 @@ def bfsAlgo():
 
         bfs_result = list(map(str, bfs(graph, start_node))
                           ) if bfs(graph, start_node) else None
-        img_folder = "C:\\Users\\lenovo\\Desktop\\TG GUI Flask\\static\\img"
-        # delete existing images in folder
+
         for filename in os.listdir(img_folder):
             file_path = os.path.join(img_folder, filename)
             os.unlink(file_path)
@@ -127,15 +121,11 @@ def bfsAlgo():
         fig.clf()
         plt.title('Graph')
 
-        # Draw the graph with edge labels
         pos = nx.spring_layout(graph)
         edge_labels = nx.get_edge_attributes(graph, 'weight')
         nx.draw(graph, pos, with_labels=True, node_color='lightblue',
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
-
-        # plt.ion()
-        # plt.show()
 
         plt.savefig(os.path.join(img_folder, 'bfs_graph.png'), format='png')
 
@@ -162,8 +152,6 @@ def primAlgo():
         prim.graph = adj_matrix
         prim_result = prim.primMST()
 
-        img_folder = "C:\\Users\\lenovo\\Desktop\\TG GUI Flask\\static\\img"
-        # delete existing images in folder
         for filename in os.listdir(img_folder):
             file_path = os.path.join(img_folder, filename)
             os.unlink(file_path)
@@ -172,15 +160,11 @@ def primAlgo():
         fig.clf()
         plt.title('Graph')
 
-        # Draw the graph with edge labels
         pos = nx.spring_layout(graph)
         edge_labels = nx.get_edge_attributes(graph, 'weight')
         nx.draw(graph, pos, with_labels=True, node_color='lightblue',
                 node_size=500, font_size=10, font_weight='bold')
         nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels)
-
-        # plt.ion()
-        # plt.show()
 
         plt.savefig(os.path.join(
             img_folder, 'prim_graph_before.png'), format='png')
