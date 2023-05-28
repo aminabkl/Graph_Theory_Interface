@@ -15,7 +15,7 @@ matplotlib.use('Agg')
 app = Flask(__name__)
 
 #  PLEASE CHANGE THE PATH SO IT SUITS YOUR LOCAL ENV
-img_folder = "C:\\Users\\lenovo\\Desktop\\TG GUI Flask\\static\\img"
+img_folder = "C:\\Users\\lenovo\\Desktop\\Graph_Theory_Interface\\static\\img"
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -198,6 +198,7 @@ def kosarajuAlgo():
                 adj_matrix[i][j] = int(request.form[f'adj_matrix_{i}_{j}'])
 
         graph = nx.DiGraph(adj_matrix)
+        start_node = int(request.form['start_node'])
 
         # Step 1: Convert adjacency matrix to adjacency list
         graph_dict = {node: [] for node in range(num_nodes)}
@@ -207,7 +208,8 @@ def kosarajuAlgo():
                     graph_dict[i].append(j)
 
         # Step 2: Apply Kosaraju's algorithm
-        kosaraju_result = kosaraju(graph_dict)
+        kosaraju_result = kosaraju(graph_dict, start_node)
+        # kosaraju_result = kosaraju(graph_dict)
 
         # Step 3: Convert the kosaraju_result to a format suitable for visualization
         component_labels = {}
